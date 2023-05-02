@@ -1,0 +1,27 @@
+<div style="display: flex; align-items: center; justify-content: center;">
+<div *ngIf="!juegoComenzado">
+    <button (click)="comenzarJuego()">Comenzar juego</button>
+  </div>
+  
+<div *ngIf="juegoComenzado" >
+    <h2>{{ preguntaActual }}</h2>
+    <h3>Palabra: {{ palabraActual }}</h3>
+    <h4>{{this.respuestaCorrecta}} </h4>
+    <ul>
+      <li *ngFor="let opcion of opciones; let i = index">
+        <label>
+          <input type="radio" name="respuesta" [(ngModel)]="respuestas[preguntasRespondidas]" [value]="i">
+          {{ opcion }}
+          <h3>Puntaje total: {{ puntos }}</h3>
+        </label>
+      </li>
+    </ul>
+    <button class="btn btn-success" (click)="verificarRespuesta()" [disabled]="preguntasRespondidas === 10">Responder</button>
+    <div *ngIf="preguntasRespondidas === 10">
+      <h2>Fin del juego</h2>
+      <h3>Puntaje total: {{ puntos }} /10</h3>
+      
+      <button (click)="reiniciar()">Jugar de nuevo</button>
+    </div>
+  </div>
+</div>

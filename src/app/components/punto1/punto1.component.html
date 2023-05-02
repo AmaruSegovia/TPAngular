@@ -1,0 +1,32 @@
+<div class="container-fluid text-center">
+  <section class="row align-items-start justify-content-center">
+    <div *ngFor="let producto of productos" class="card col-md-3 ms-4 mb-4" style="width: 18rem;">
+      <img class="mt-3" [src]="producto.img" alt="">
+      <div class="card-body">
+        <h5 class="card-title">{{producto.nombre}}</h5>
+        <p class="card-text"></p>
+      </div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">{{producto.descripcion}}</li>
+        <li class="list-group-item">{{producto.precio}}</li>
+      </ul>
+      <div class="card-body d-flex justify-content-center">
+        <button type="button" class="btn btn-primary" (click)="seleccionarProducto(producto)"> Agregar <i class="fa fa-plus"></i></button>
+      </div>
+    </div>
+  </section>
+  
+  <button (click)="openModal()" type="button" class="btn btn-primary">Ver mi carrito <i class="fa-sharp fa-solid fa-cart-shopping"></i></button>
+  <div class="row justify-content-center"*ngIf="modalSwitch == true">
+    <div class="col-6 mt-3">
+      <h2>Productos Seleccionados</h2>
+      <ul>
+        <li *ngFor="let producto of productosSeleccionados">
+          {{producto.nombre}} - ${{producto.precio}}
+          <button type="button" class="btn btn-primary mb-4" (click)="eliminarProducto(producto)">Eliminar <i class="fa-solid fa-trash"></i></button>
+        </li>
+      </ul>
+      <p>Total: ${{precioTotal}}</p>
+    </div>
+  </div>
+</div>
